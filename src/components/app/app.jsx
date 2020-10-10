@@ -15,24 +15,12 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <WelcomePage errorsCount={errorsCount} />
-        </Route>
-        <Route exact path="/dev-artist">
-          <ArtistQuestionPage />
-        </Route>
-        <Route exact path="/dev-genre">
-          <GenreQuestionPage />
-        </Route>
-        <Route exact path="/login">
-          <AuthPage />
-        </Route>
-        <Route exact path="/result">
-          <WinPage />
-        </Route>
-        <Route exact path="/lose">
-          <LosePage />
-        </Route>
+        <Route exact path="/" render={()=> <WelcomePage errorsCount={errorsCount} />} />
+        <Route exact path="/dev-artist" component={ArtistQuestionPage} />
+        <Route exact path="/dev-genre" component={GenreQuestionPage} />
+        <Route exact path="/login" component={AuthPage} />
+        <Route exact path="/result" component={WinPage} />
+        <Route exact path="/lose" component={LosePage} />
       </Switch>
     </BrowserRouter>
   );
