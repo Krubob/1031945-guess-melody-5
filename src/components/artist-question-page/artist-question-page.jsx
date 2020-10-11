@@ -47,7 +47,7 @@ const ArtistQuestionPage = (props) => {
               />
               <label className="artist__name" htmlFor={`answer-${i}`}>
                 <img className="artist__picture" src={answer.picture} alt={answer.artist} />
-              Пелагея
+                {answer.artist}
               </label>
             </div>
           ))}
