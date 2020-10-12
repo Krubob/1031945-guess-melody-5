@@ -17,13 +17,12 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/"
-          render={({history}) => (
-            <WelcomePage
-              onPlayButtonClick={() => history.push(`/game`)}
-              errorsCount={errorsCount}
-            />
-          )}
+        <Route exact path="/" render={({history}) => (
+          <WelcomePage
+            onPlayBtnClick={() => history.push(`/game`)}
+            errorsCount={errorsCount}
+          />
+        )}
         />
         <Route exact path="/dev-artist">
           <ArtistQuestionPage
