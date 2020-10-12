@@ -12,43 +12,40 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 const App = (props) => {
 
   const {errorsCount, questions} = props;
-  const [firstQuestion, secondQuestion] = questions;
+  const [genreQuestion, artistQuestion] = questions;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={({history}) => (
-          <WelcomePage
-            onPlayBtnClick={() => history.push(`/game`)}
-            errorsCount={errorsCount}
-          />
-        )}
+        <Route exact path="/"
+          render={({history}) => (
+            <WelcomePage
+              onPlayButtonClick={() => history.push(`/game`)}
+              errorsCount={errorsCount}
+            />
+          )}
         />
-        )
-        <Route exact path="/dev-artist" render={() => (
+        <Route exact path="/dev-artist">
           <ArtistQuestionPage
-            question={secondQuestion}
+            question={artistQuestion}
             onAnswer={() => {}}
           />
-        )}
-        />
-        <Route exact path="/dev-genre" render={() => (
+        </Route>
+        <Route exact path="/dev-genre">
           <GenreQuestionPage
-            question={firstQuestion}
+            question={genreQuestion}
             onAnswer={() => {}}
           />
-        )}
-        />
+        </Route>
         <Route exact path="/login" component={AuthPage} />
         <Route exact path="/result" component={WinPage} />
         <Route exact path="/lose" component={LosePage} />
-        <Route exact path="/game" render={() => (
+        <Route exact path="/game">
           <GamePage
             errorsCount={errorsCount}
             questions={questions}
           />
-        )}
-        />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

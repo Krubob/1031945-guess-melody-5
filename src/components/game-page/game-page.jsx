@@ -46,8 +46,9 @@ class GamePage extends PureComponent {
             onAnswer={onAnswer}
           />
         );
+      default:
+        return <Redirect to="/" />;
     }
-    return <Redirect to="/" />;
   }
 }
 
