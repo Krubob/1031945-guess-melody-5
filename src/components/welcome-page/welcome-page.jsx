@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const WelcomePage = (props) => {
-  // eslint-disable-next-line react/prop-types
+
   const {errorsCount} = props;
   return (
     <section className="welcome">
