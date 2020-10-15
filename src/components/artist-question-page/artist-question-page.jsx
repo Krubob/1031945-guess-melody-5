@@ -84,4 +84,5 @@ ArtistQuestionPage.propTypes = {
     type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
   }).isRequired,
 };
+
 export default ArtistQuestionPage;
