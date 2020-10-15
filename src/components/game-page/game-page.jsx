@@ -4,6 +4,10 @@ import {Redirect} from 'react-router-dom';
 import {GameType} from '../../const';
 import ArtistQuestionPage from '../artist-question-page/artist-question-page';
 import GenreQuestionPage from '../genre-question-page/genre-question-page';
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+
+const GenreQuestionPageWrapped = withAudioPlayer(GenreQuestionPage);
+const ArtistQuestionPageWrapped = withAudioPlayer(ArtistQuestionPage);
 
 class GamePage extends PureComponent {
   constructor(props) {
@@ -34,14 +38,14 @@ class GamePage extends PureComponent {
     switch (question.type) {
       case GameType.ARTIST:
         return (
-          <ArtistQuestionPage
+          <ArtistQuestionPageWrapped
             question={question}
             onAnswer={onAnswer}
           />
         );
       case GameType.GENRE:
         return (
-          <GenreQuestionPage
+          <GenreQuestionPageWrapped
             question={question}
             onAnswer={onAnswer}
           />
