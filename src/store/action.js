@@ -1,4 +1,4 @@
-import {isArtistAnswerCorrect, isGenreAnswerCorrect} from "../game";
+import {isArtistAnswerCorrect, isGenreAnswerCorrect} from "../games";
 import {GameType} from "../const";
 
 export const ActionType = {

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {GameType} from "../../const";
+import {GenrePropTypes} from "../../propTypes";
 
 class GenreQuestionPage extends PureComponent {
   constructor(props) {
@@ -66,16 +66,9 @@ class GenreQuestionPage extends PureComponent {
 
 GenreQuestionPage.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  question: PropTypes.shape({
-    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
-    genre: PropTypes.string.isRequired,
-    answers: PropTypes.arrayOf(PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired
-    })).isRequired,
-  }).isRequired,
   renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
+  question: GenrePropTypes,
 };
 
 export default GenreQuestionPage;
