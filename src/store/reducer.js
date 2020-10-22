@@ -17,12 +17,12 @@ const reducer = (state = initialState, action) => {
         step: nextStep,
       });
     case ActionType.INCREMENT_MISTAKES:
-      let mistakes = state.mistakes + 1;
+      const mistakes = state.mistakes + action.payload;
       if (mistakes >= MAX_MISTAKES) {
         return extend({}, initialState);
       }
       return extend(state, {
-        mistakes: state.mistakes + 1,
+        mistakes: state.mistakes + action.payload,
       });
     case ActionType.RESET_GAME:
       return extend({}, initialState);

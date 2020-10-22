@@ -17,3 +17,5 @@ ReactDOM.render(
     </Provider>,
     document.querySelector(`#root`)
 );
+
+// store.subscribe(() => console.log(store.getState()));

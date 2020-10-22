@@ -15,7 +15,8 @@ export const ActionCreator = {
     type: ActionType.RESET_GAME,
   }),
   incrementMistakes: (question, userAnswer) => {
-    let answerIsCorrect = false;
+    let answerIsCorrect = true;
+    let payloadValue = Number(answerIsCorrect);
 
     switch (question.type) {
       case GameType.ARTIST:
@@ -28,7 +29,7 @@ export const ActionCreator = {
 
     return {
       type: ActionType.INCREMENT_MISTAKES,
-      payload: Number(answerIsCorrect),
+      payload: payloadValue,
     };
   }
 };
