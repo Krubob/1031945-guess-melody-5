@@ -27,17 +27,17 @@ const GamePage = (props) => {
   switch (question.type) {
     case GameType.ARTIST:
       return (
-        <ArtistQuestionPageWrapped>
+        <ArtistQuestionPageWrapped
           question={question}
-          onAnswer={onUserAnswer}
+          onAnswer={onUserAnswer}>
           <Mistakes count={mistakes}/>
         </ArtistQuestionPageWrapped>
       );
     case GameType.GENRE:
       return (
-        <GenreQuestionPageWrapped>
+        <GenreQuestionPageWrapped
           question={question}
-          onAnswer={onUserAnswer}
+          onAnswer={onUserAnswer}>
           <Mistakes count={mistakes}/>
         </GenreQuestionPageWrapped>
       );
