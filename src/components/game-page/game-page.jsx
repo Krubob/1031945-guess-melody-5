@@ -1,63 +1,76 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import {GameType} from '../../const';
+import Mistakes from "../mistakes/mistakes";
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import ArtistQuestionPage from '../artist-question-page/artist-question-page';
 import GenreQuestionPage from '../genre-question-page/genre-question-page';
-import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+import {ArtistPropTypes, GenrePropTypes} from "../../propTypes";
 
 const GenreQuestionPageWrapped = withAudioPlayer(GenreQuestionPage);
 const ArtistQuestionPageWrapped = withAudioPlayer(ArtistQuestionPage);
 
-class GamePage extends PureComponent {
-  constructor(props) {
-    super(props);
+const GamePage = (props) => {
+  const {questions, step, resetGame, onUserAnswer, mistakes} = props;
+  const question = questions[step];
 
-    this.state = {
-      step: 0,
-    };
+  if (step >= questions.length || !question) {
+    resetGame();
+    return (
+      <Redirect to="/" />
+    );
   }
 
-  render() {
-    const {questions} = this.props;
-    const {step} = this.state;
-    const question = questions[step];
-
-    const onAnswer = () => {
-      this.setState((prevState) => ({
-        step: prevState.step + 1,
-      }));
-    };
-
-    if (step >= questions.length || !question) {
+  switch (question.type) {
+    case GameType.ARTIST:
       return (
-        <Redirect to="/" />
+        <ArtistQuestionPageWrapped
+          question={question}
+          onAnswer={onUserAnswer}>
+          <Mistakes count={mistakes}/>
+        </ArtistQuestionPageWrapped>
       );
-    }
-
-    switch (question.type) {
-      case GameType.ARTIST:
-        return (
-          <ArtistQuestionPageWrapped
-            question={question}
-            onAnswer={onAnswer}
-          />
-        );
-      case GameType.GENRE:
-        return (
-          <GenreQuestionPageWrapped
-            question={question}
-            onAnswer={onAnswer}
-          />
-        );
-      default:
-        return <Redirect to="/" />;
-    }
+    case GameType.GENRE:
+      return (
+        <GenreQuestionPageWrapped
+          question={question}
+          onAnswer={onUserAnswer}>
+          <Mistakes count={mistakes}/>
+        </GenreQuestionPageWrapped>
+      );
+    default:
+      return <Redirect to="/" />;
   }
-}
-
-GamePage.propTypes = {
-  questions: PropTypes.array.isRequired,
 };
 
-export default GamePage;
+GamePage.propTypes = {
+  questions: PropTypes.arrayOf(
+      PropTypes.oneOfType([ArtistPropTypes, GenrePropTypes]).isRequired
+  ),
+  step: PropTypes.number.isRequired,
+  resetGame: PropTypes.func.isRequired,
+  onUserAnswer: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  step: state.step,
+  mistakes: state.mistakes,
+  questions: state.questions,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  resetGame() {
+    dispatch(ActionCreator.resetGame());
+  },
+  onUserAnswer(question, answer) {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(question, answer));
+  }
+});
+
+export {GamePage};
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
