@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {GenrePropTypes} from "../../propTypes";
+import GenreQuestionItem from "../genre-question-item/genre-question-item";
 
 const GenreQuestionPage = (props) => {
 
@@ -31,18 +32,14 @@ const GenreQuestionPage = (props) => {
           }}
         >
           {answers.map((answer, i) => (
-            <div key={`${i}-${answer.src}`} className="track">
-              {renderPlayer(answer.src, i)}
-              <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} checked={userAnswers[i]}
-                  onChange={(evt) => {
-                    const value = evt.target.checked;
-                    onChange(i, value);
-                  }}
-                />
-                <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
-              </div>
-            </div>
+            <GenreQuestionItem
+              answer={answer}
+              id={i}
+              key={`answer-${i}`}
+              onChange={onChange}
+              renderPlayer={renderPlayer}
+              userAnswer={userAnswers[i]}
+            />
           ))}
           <button className="game__submit button" type="submit">Ответить</button>
         </form>
