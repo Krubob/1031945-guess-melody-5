@@ -6,11 +6,12 @@ import {ActionCreator} from "../../store/action";
 import {GameType} from '../../const';
 import Mistakes from "../mistakes/mistakes";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import ArtistQuestionPage from '../artist-question-page/artist-question-page';
 import GenreQuestionPage from '../genre-question-page/genre-question-page';
 import {ArtistPropTypes, GenrePropTypes} from "../../propTypes";
 
-const GenreQuestionPageWrapped = withAudioPlayer(GenreQuestionPage);
+const GenreQuestionPageWrapped = withAudioPlayer(withUserAnswer(GenreQuestionPage));
 const ArtistQuestionPageWrapped = withAudioPlayer(ArtistQuestionPage);
 
 const GamePage = (props) => {
