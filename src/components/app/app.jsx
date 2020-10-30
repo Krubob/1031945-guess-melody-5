@@ -19,8 +19,18 @@ const App = () => {
         )}
         />
         <Route exact path="/login" component={AuthPage} />
-        <Route exact path="/result" component={WinPage} />
-        <Route exact path="/lose" component={LosePage} />
+        <Route exact path="/result" render={({history}) => (
+          <WinPage
+            onReplayButtonClick={() => history.push(`/game`)}
+          />
+        )}
+        />
+        <Route exact path="/lose" crender={({history}) => (
+          <LosePage
+            onReplayButtonClick={() => history.push(`/game`)}
+          />
+        )}
+        />
         <Route exact path="/game">
           <GamePage
             errorsCount={MAX_MISTAKES}
