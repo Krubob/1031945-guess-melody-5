@@ -1,11 +1,10 @@
 import {extend} from "../utils";
 import {ActionType} from "./action";
-import questions from "../mocks/questions";
 
 const initialState = {
   mistakes: 0,
   step: 0,
-  questions,
+  questions: [],
 };
 
 const reducer = (state = initialState, action) => {
