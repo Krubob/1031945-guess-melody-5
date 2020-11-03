@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {requireAuthorization} from "./store/action";
-import {fetchQuestionList} from "./store/api-actions";
+import {fetchQuestionList, checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
 
 const api = createAPI(
@@ -23,7 +23,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchQuestionList());
-store.dispatch(fetchQuestionList());
+store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
