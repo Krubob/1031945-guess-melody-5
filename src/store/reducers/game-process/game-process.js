@@ -1,16 +1,15 @@
-import {extend} from "../utils";
-import {ActionType} from "./action";
+import {extend} from "../../../utils";
+import {ActionType} from "../../action";
 
 const initialState = {
   mistakes: 0,
   step: 0,
-  questions: [],
 };
 
-const reducer = (state = initialState, action) => {
+const gameProcess = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_STEP:
-      let nextStep = state.step + 1;
+      let nextStep = state.step + action.payload;
       return extend(state, {
         step: nextStep,
       });
@@ -20,9 +19,8 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.RESET_GAME:
       return extend({}, initialState);
-    default:
-      return state;
   }
+  return state;
 };
 
-export {reducer};
+export {gameProcess};

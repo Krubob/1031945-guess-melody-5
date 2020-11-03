@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {incrementStep, incrementMistakes, resetGame} from "../../store/action";
 import {GameType, MAX_MISTAKES} from '../../const';
 import Mistakes from "../mistakes/mistakes";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
@@ -61,19 +61,19 @@ GamePage.propTypes = {
   mistakes: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  step: state.step,
-  mistakes: state.mistakes,
-  questions: state.questions,
+const mapStateToProps = ({GAME, DATA}) => ({
+  step: GAME.step,
+  mistakes: GAME.mistakes,
+  questions: DATA.questions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  resetGame() {
-    dispatch(ActionCreator.resetGame());
+  resetGameAction() {
+    dispatch(resetGame());
   },
   onUserAnswer(question, answer) {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(question, answer));
+    dispatch(incrementStep());
+    dispatch(incrementMistakes(question, answer));
   }
 });
 
