@@ -6,6 +6,7 @@ import LosePage from "../lose-page/lose-page";
 import GamePage from "../game-page/game-page";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {MAX_MISTAKES} from "../../const";
+import PrivateRoute from "../private-route/private-route";
 
 const App = () => {
   return (
@@ -18,8 +19,13 @@ const App = () => {
           />
         )}
         />
-        <Route exact path="/login" component={AuthPage} />
-        <Route exact path="/result" render={({history}) => (
+        <Route exact path="/login" render={({history}) => (
+          <AuthPage
+            onReplayButtonClick={() => history.push(`/game`)}
+          />
+        )}
+        />
+        <PrivateRoute exact path={`/result`} render={({history}) => (
           <WinPage
             onReplayButtonClick={() => history.push(`/game`)}
           />
