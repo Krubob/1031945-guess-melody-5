@@ -34,6 +34,7 @@ const GamePage = (props) => {
     case GameType.ARTIST:
       return (
         <ArtistQuestionPageWrapped
+          key={step}
           question={question}
           onAnswer={onUserAnswer}>
           <Mistakes count={mistakes}/>
@@ -42,6 +43,7 @@ const GamePage = (props) => {
     case GameType.GENRE:
       return (
         <GenreQuestionPageWrapped
+          key={step}
           question={question}
           onAnswer={onUserAnswer}>
           <Mistakes count={mistakes}/>

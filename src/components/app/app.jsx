@@ -4,13 +4,14 @@ import AuthPage from "../auth-page/auth-page";
 import WinPage from "../win-page/win-page";
 import LosePage from "../lose-page/lose-page";
 import GamePage from "../game-page/game-page";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import {MAX_MISTAKES} from "../../const";
 import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/" render={({history}) => (
           <WelcomePage
