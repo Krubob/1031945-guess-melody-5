@@ -25,7 +25,7 @@ const App = () => {
           />
         )}
         />
-        <Route exact path="/lose" crender={({history}) => (
+        <Route exact path="/lose" render={({history}) => (
           <LosePage
             onReplayButtonClick={() => history.push(`/game`)}
           />

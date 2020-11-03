@@ -32,7 +32,7 @@ export const incrementMistakes = (question, userAnswer) => {
 
   return {
     type: ActionType.INCREMENT_MISTAKES,
-    payload: answerIsCorrect ? 0 : 1,
+    payload: Number(!answerIsCorrect),
   };
 };
 
