@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import {incrementStep, incrementMistakes, resetGame} from "../../store/action";
-import {GameType, MAX_MISTAKES} from '../../const';
+import {GameType, MAX_MISTAKES, AppRoute} from '../../const';
 import Mistakes from "../mistakes/mistakes";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
@@ -20,13 +20,13 @@ const GamePage = (props) => {
 
   if (mistakes >= MAX_MISTAKES) {
     return (
-      <Redirect to="/lose" />
+      <Redirect to={AppRoute.LOSE} />
     );
   }
 
   if (step >= questions.length || !question) {
     return (
-      <Redirect to="/result" />
+      <Redirect to={AppRoute.RESULT} />
     );
   }
 
@@ -50,7 +50,7 @@ const GamePage = (props) => {
         </GenreQuestionPageWrapped>
       );
     default:
-      return <Redirect to="/" />;
+      return <Redirect to={AppRoute.ROOT} />;
   }
 };
 
