@@ -8,4 +8,10 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+export const LoadingStatus = {
+  LOADED: `LOADED`,
+  ERROR: `ERROR`,
+};
+
+
 export const MAX_MISTAKES = 3;

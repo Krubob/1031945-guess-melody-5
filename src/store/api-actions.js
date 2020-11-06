@@ -1,5 +1,5 @@
 import {loadQuestions, requireAuthorization} from "./action";
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus, LoadingStatus} from "../const";
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -16,5 +16,6 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const fetchQuestionList = () => (dispatch, _getState, api) => (
   api.get(`/questions`)
-    .then(({data}) => dispatch(loadQuestions(data)))
+    .then(({data}) => dispatch(loadQuestions(data, LoadingStatus.LOADED)))
+    .catch((data, status = LoadingStatus.ERROR) => dispatch(loadQuestions(data, status)))
 );
