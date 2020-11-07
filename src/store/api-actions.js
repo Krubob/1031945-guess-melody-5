@@ -17,5 +17,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 export const fetchQuestionList = () => (dispatch, _getState, api) => (
   api.get(`/questions`)
     .then(({data}) => dispatch(loadQuestions(data, LoadingStatus.LOADED)))
-    .catch((data, status = LoadingStatus.ERROR) => dispatch(loadQuestions(data, status)))
+    .catch((err) => {
+      throw err;
+    })
 );

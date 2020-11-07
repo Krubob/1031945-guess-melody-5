@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {resetGame} from "../../store/action";
+import {getMistakes, getStep} from "../../store/selectors";
 
 const WinPage = (props) => {
   const {questionsCount, mistakesCount, onReplayButtonClick, resetGameAction} = props;
@@ -35,9 +36,9 @@ WinPage.propTypes = {
   resetGameAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({GAME}) => ({
-  questionsCount: GAME.step,
-  mistakesCount: GAME.mistakes,
+const mapStateToProps = (state) => ({
+  questionsCount: getStep(state),
+  mistakesCount: getMistakes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
