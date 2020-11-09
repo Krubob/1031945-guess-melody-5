@@ -1,13 +1,20 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import WelcomePage from "../welcome-page/welcome-page";
 import AuthPage from "../auth-page/auth-page";
 import WinPage from "../win-page/win-page";
 import LosePage from "../lose-page/lose-page";
 import GamePage from "../game-page/game-page";
+import {fetchQuestionList} from "../../store/api-actions";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {MAX_MISTAKES} from "../../const";
+import {connect} from "react-redux";
 
-const App = () => {
+const App = (props) => {
+  const {loadQuestion} = props;
+
+  Promise.all([loadQuestion()]);
+
   return (
     <BrowserRouter>
       <Switch>
@@ -25,7 +32,7 @@ const App = () => {
           />
         )}
         />
-        <Route exact path="/lose" crender={({history}) => (
+        <Route exact path="/lose" render={({history}) => (
           <LosePage
             onReplayButtonClick={() => history.push(`/game`)}
           />
@@ -41,6 +48,15 @@ const App = () => {
   );
 };
 
-App.propTypes = {};
+App.propTypes = {
+  loadQuestion: PropTypes.func.isRequired,
+};
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  loadQuestion() {
+    dispatch(fetchQuestionList());
+  },
+});
+
+export {App};
+export default connect(null, mapDispatchToProps)(App);

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {resetGame} from "../../store/action";
 
 const LosePage = (props) => {
-  const {onReplayButtonClick, resetGame} = props;
+  const {onReplayButtonClick, resetGameAction} = props;
 
   return (
     <section className="result">
@@ -14,7 +14,7 @@ const LosePage = (props) => {
       <button
         className="replay"
         onClick={() => {
-          resetGame();
+          resetGameAction();
           onReplayButtonClick();
         }}
         type="button">
@@ -26,12 +26,12 @@ const LosePage = (props) => {
 
 LosePage.propTypes = {
   onReplayButtonClick: PropTypes.func.isRequired,
-  resetGame: PropTypes.func.isRequired,
+  resetGameAction: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  resetGame() {
-    dispatch(ActionCreator.resetGame());
+  resetGameAction() {
+    dispatch(resetGame());
   },
 });
 

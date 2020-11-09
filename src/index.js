@@ -1,14 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import App from "./components/app/app";
-import {reducer} from "./store/reducer";
+import rootReducer from "./store/reducers/root-reducer";
+import thunk from "redux-thunk";
+import {createAPI} from "./services/api";
+import {composeWithDevTools} from "redux-devtools-extension";
+import {requireAuthorization} from "./store/action";
+import {AuthorizationStatus} from "./const";
 
+const api = createAPI(
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
 ReactDOM.render(
@@ -18,4 +28,3 @@ ReactDOM.render(
     document.querySelector(`#root`)
 );
 
-// store.subscribe(() => console.log(store.getState()));
