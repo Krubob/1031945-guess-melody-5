@@ -5,7 +5,7 @@ export const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
   RESET_GAME: `RESET_GAME`,
-  LOAD_QUESTIONS: `LOAD_QUESTIONS`,
+  LOAD_QUESTIONS_SUCCESS: `LOAD_QUESTIONS_SUCCESS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
@@ -37,9 +37,10 @@ export const incrementMistakes = (question, userAnswer) => {
   };
 };
 
-export const loadQuestions = (questions) => ({
-  type: ActionType.LOAD_QUESTIONS,
+export const loadQuestions = (questions, status) => ({
+  type: ActionType.LOAD_QUESTIONS_SUCCESS,
   payload: questions,
+  status,
 });
 
 export const requireAuthorization = (status) => ({

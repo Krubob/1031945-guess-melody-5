@@ -10,6 +10,7 @@ import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import ArtistQuestionPage from '../artist-question-page/artist-question-page';
 import GenreQuestionPage from '../genre-question-page/genre-question-page';
 import {ArtistPropTypes, GenrePropTypes} from "../../propTypes";
+import {getMistakes, getStep, getQuestion} from "../../store/selectors";
 
 const GenreQuestionPageWrapped = withAudioPlayer(withUserAnswer(GenreQuestionPage));
 const ArtistQuestionPageWrapped = withAudioPlayer(ArtistQuestionPage);
@@ -63,10 +64,10 @@ GamePage.propTypes = {
   mistakes: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({GAME, DATA}) => ({
-  step: GAME.step,
-  mistakes: GAME.mistakes,
-  questions: DATA.questions,
+const mapStateToProps = (state) => ({
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  questions: getQuestion(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

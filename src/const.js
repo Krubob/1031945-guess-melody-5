@@ -21,4 +21,10 @@ export const APIRoute = {
   LOGIN: `/login`,
 };
 
+export const LoadingStatus = {
+  LOADED: `LOADED`,
+  ERROR: `ERROR`,
+};
+
+
 export const MAX_MISTAKES = 3;

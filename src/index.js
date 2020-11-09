@@ -8,7 +8,6 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {requireAuthorization} from "./store/action";
-import {fetchQuestionList, checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";
 
@@ -24,16 +23,10 @@ const store = createStore(
     )
 );
 
-Promise.all([
-  store.dispatch(fetchQuestionList()),
-  store.dispatch(checkAuth()),
-])
-.then(() => {
-  ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      document.querySelector(`#root`)
-  );
-});
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector(`#root`)
+);
 
